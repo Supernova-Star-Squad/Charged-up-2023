@@ -11,26 +11,23 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
-public class ShooterSubsystem extends SubsystemBase {
+public class SpinnerSubsystem extends SubsystemBase {
   /**
-   * Creates a new ShooterSubsystem.
+   * Creates a new SpinnerSubsystem.
    */
-  public ShooterSubsystem() {
+  public SpinnerSubsystem() {
 
   }
+  public WPI_VictorSPX spinnerController = new WPI_VictorSPX(RobotMap.spinnerMotor);
 
-  public WPI_VictorSPX shooterController = new WPI_VictorSPX(RobotMap.shooterMotor);
-
-  public void fire(){
-     shooterController.set(RobotMap.shooterThrottle);    
+  public void left(){
+    spinnerController.set(-1*RobotMap.spinnerThrottle);
   }
-
-  public void unfire(){
-    shooterController.set(-RobotMap.shooterThrottle);
+  public void right(){
+    spinnerController.set(1*RobotMap.spinnerThrottle);
   }
-  
   public void stop(){
-    shooterController.set(0);
+    spinnerController.set(0);
   }
 
   @Override

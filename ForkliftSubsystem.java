@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotMap;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 public class ForkliftSubsystem extends SubsystemBase {
@@ -17,16 +18,19 @@ public class ForkliftSubsystem extends SubsystemBase {
   public ForkliftSubsystem() {
 
   }
-  public WPI_VictorSPX forkliftController = new WPI_VictorSPX(Atlas.forkliftMotor);
-  
-  public void up()
-  {
-    forkliftController.set(1);
-  }
-  public void down()
-  {
-    forkliftController.set(-1);
-  }
+  public WPI_VictorSPX forkliftController = new WPI_VictorSPX(RobotMap.forkliftMotor);
+
+  public void raise(){
+    forkliftController.set(RobotMap.forkliftThrottle);    
+ }
+
+ public void lower(){
+   forkliftController.set(-RobotMap.forkliftThrottle);
+ }
+ 
+ public void stop(){
+   forkliftController.set(0);
+ }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
