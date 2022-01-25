@@ -13,19 +13,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 // Imports //
 // wpilib imports //
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
-// import edu.wpi.first.wpilibj.buttons.*;
-// RobotMap //
 import frc.robot.RobotMap;
 
 
 // Subsystems //
 import frc.robot.DriveSubsystem;
-import frc.robot.ShooterSubsystem;
-import frc.robot.SpinnerSubsystem;
-import frc.robot.IntakeSubsystem;
-import frc.robot.ForkliftSubsystem;
-
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -43,14 +35,7 @@ public class Robot extends TimedRobot {
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
    */
-  // ShooterSubsystem //
-  public ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
-  // IntakeSubsystem //
-  public IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
-  // SpinnerSubsystem //
-  public SpinnerSubsystem spinnerSubsystem = new SpinnerSubsystem();
-  // ForkliftSUbsystem //
-  public ForkliftSubsystem forkliftSubsystem = new ForkliftSubsystem();
+  
   // drive and joystick //
   public static DriveSubsystem driveSubsystem = new DriveSubsystem();
   
@@ -86,35 +71,7 @@ public class Robot extends TimedRobot {
    * the switch structure below with additional strings. If using the
    * SendableChooser make sure to add them to the chooser code above as well.
    */
-  @Override
-  public void autonomousInit() {
-    m_autoSelected = m_chooser.getSelected();
-    // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
-    System.out.println("Auto selected: " + m_autoSelected);
-  }
-
-  /**
-   * This function is called periodically during autonomous.
-   */
-  @Override
-  public void autonomousPeriodic() {
-    switch (m_autoSelected) {
-      case kCustomAuto:
-        // Put custom auto code here
-        break;
-      case kDefaultAuto:
-      default:
-        // Put default auto code here
-        break;
-    }
-  }
-
-  /**
-   * This function is called once when teleop is enabled.
-   */
-  @Override
-  public void teleopInit() {
-   
+ 
   }
   public Joystick logitech = new Joystick(RobotMap.joystickPort);
   JoystickButton shootButton = new JoystickButton(logitech,1);
@@ -138,68 +95,7 @@ public class Robot extends TimedRobot {
   /**
    * This function is called periodically during operator control.
    */
-  @Override
-  public void teleopPeriodic() {
-    drive();
-
- // can't make this line work
- // shootButton.whileHeld(shooterSubsystem.fire());
- //
-    
-    if (logitech.getRawButton(1)){
-      shooterSubsystem.fire();
-    }
-    else if (logitech.getRawButtonReleased(1)){
-      shooterSubsystem.stop();
-    }
-     else if (logitech.getRawButton(2)){
-      shooterSubsystem.unfire();
-    }
-    else if (logitech.getRawButtonReleased(2)){
-        shooterSubsystem.stop();
-    }
-    else if (logitech.getRawButton(7)){
-      spinnerSubsystem.left();
-    }
-    else if (logitech.getRawButtonReleased(7)){
-      spinnerSubsystem.stop();
-    }
-    else if (logitech.getRawButton(8)){
-      spinnerSubsystem.right();
-    }
-    else if (logitech.getRawButtonReleased(8)){
-      spinnerSubsystem.stop();
-    }
-    else if (logitech.getRawButton(3)){
-      intakeSubsystem.load();
-    }
-    else if (logitech.getRawButtonReleased(3)){
-      intakeSubsystem.stop();
-    }
-    else if (logitech.getRawButton(4)){
-      intakeSubsystem.unload();
-    }
-    else if (logitech.getRawButtonReleased(4)){
-      intakeSubsystem.stop();
-    }
-    else if (logitech.getRawButton(11)){
-      forkliftSubsystem.raise();
-    }
-    else if (logitech.getRawButtonReleased(11)){
-      forkliftSubsystem.stop();
-    }
-    else if (logitech.getRawButton(12)){
-      forkliftSubsystem.lower();
-    }
-    else if (logitech.getRawButtonReleased(12)){
-      forkliftSubsystem.stop();
-    }
-
-    
-    
-    
-
-  }
+  
   /**
    * This function is called once when the robot is disabled.
    */
