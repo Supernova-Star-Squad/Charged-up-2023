@@ -13,11 +13,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 // Imports //
 // wpilib imports //
 import edu.wpi.first.wpilibj.Joystick;
+// import edu.wpi.first.wpilibj.buttons.*;
+// RobotMap //
 import frc.robot.RobotMap;
 
 
 // Subsystems //
 import frc.robot.DriveSubsystem;
+
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -31,16 +34,8 @@ public class Robot extends TimedRobot {
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
-  /**
-   * This function is run when the robot is first started up and should be
-   * used for any initialization code.
-   */
-  
-  // drive and joystick //
   public static DriveSubsystem driveSubsystem = new DriveSubsystem();
   
-
-
   @Override
   public void robotInit() {
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
@@ -71,15 +66,42 @@ public class Robot extends TimedRobot {
    * the switch structure below with additional strings. If using the
    * SendableChooser make sure to add them to the chooser code above as well.
    */
- 
+  @Override
+  public void autonomousInit() {
+    m_autoSelected = m_chooser.getSelected();
+    // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
+    System.out.println("Auto selected: " + m_autoSelected);
+  }
+
+  /**
+   * This function is called periodically during autonomous.
+   */
+  @Override
+  public void autonomousPeriodic() {
+    switch (m_autoSelected) {
+      case kCustomAuto:
+        // Put custom auto code here
+        break;
+      case kDefaultAuto:
+      default:
+        // Put default auto code here
+        break;
+    }
+  }
+
+  /**
+   * This function is called once when teleop is enabled.
+   */
+  @Override
+  public void teleopInit() {
+   
   }
   public Joystick logitech = new Joystick(RobotMap.joystickPort);
-  JoystickButton shootButton = new JoystickButton(logitech,1);
 
   public void drive(){
     double throttle = 1-((logitech.getThrottle()+1)/2);
-    double move = -logitech.getY()*throttle;
-    double turn = logitech.getX()*throttle;
+    double move = logitech.getX();
+    double turn = -logitech.getY();
 
     // removing creep //
     if (Math.abs(turn)<0.1){
@@ -89,13 +111,23 @@ public class Robot extends TimedRobot {
       move = 0;
     }
     // Driving //
-    driveSubsystem.teleopDrive(move*throttle, turn*throttle);
+    if (throttle < 0.5)
+    {
+    driveSubsystem.teleopDrive(move, turn);
+    }
+    else
+    {
+      driveSubsystem.teleopDrive(-move, -turn);
+    }
   }
 
   /**
    * This function is called periodically during operator control.
    */
-  
+  @Override
+  public void teleopPeriodic() {
+    drive();
+  }
   /**
    * This function is called once when the robot is disabled.
    */
