@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot;
-// import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.Joystick;
 
 /**
@@ -20,11 +19,11 @@ public class RobotMap {
 
     // Motors //
         // Drive Train //
-    public static int leftFrontMotor = 0;
-    public static int leftRearMotor = 1;
-    public static int rightFrontMotor = 2;
-    public static int rightRearMotor = 3;
+    public static int leftFrontMotor = 4;
+    public static int leftRearMotor = 3;
+    public static int rightFrontMotor = 1;
+    public static int rightRearMotor = 2;
        
     // Throttle Setting //
     public static double maxThrottle = 0.7;
-    {
+}

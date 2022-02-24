@@ -7,11 +7,12 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import frc.robot.RobotMap;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
 
 public class DriveSubsystem extends SubsystemBase {
   /**
@@ -22,15 +23,15 @@ public class DriveSubsystem extends SubsystemBase {
   public WPI_TalonSRX rightFrontMotor = new WPI_TalonSRX(RobotMap.rightFrontMotor);
   public WPI_TalonSRX rightRearMotor = new WPI_TalonSRX(RobotMap.rightRearMotor);
 
-  SpeedControllerGroup leftMotors = new SpeedControllerGroup(leftFrontMotor, leftRearMotor);
-  SpeedControllerGroup rightMotors = new SpeedControllerGroup(rightFrontMotor, rightRearMotor);
+  MotorControllerGroup leftMotors = new MotorControllerGroup(leftRearMotor, leftFrontMotor);
+  MotorControllerGroup rightMotors = new MotorControllerGroup(rightRearMotor, rightFrontMotor);
 
   public DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
 
   public DriveSubsystem() {
 
-    leftRearMotor.follow(leftFrontMotor);
-    rightRearMotor.follow(rightFrontMotor);
+    leftFrontMotor.follow(leftRearMotor);
+    rightFrontMotor.follow(rightRearMotor);
 
   }
 
