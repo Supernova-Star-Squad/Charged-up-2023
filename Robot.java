@@ -117,7 +117,7 @@ public class Robot extends TimedRobot {
     }
     else
     {
-      driveSubsystem.teleopDrive(-move, -turn);
+      driveSubsystem.teleopDrive(move, -turn);
     }
   }
 
