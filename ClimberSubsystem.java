@@ -9,7 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import edu.wpi.first.wpilibj.VictorSP;
 
 public class ClimberSubsystem extends SubsystemBase {
   /**
@@ -18,8 +18,8 @@ public class ClimberSubsystem extends SubsystemBase {
   public ClimberSubsystem() {
 
   }
-  public WPI_VictorSPX climbController1 = new WPI_VictorSPX(RobotMap.ClimbMotor_1);
-  public WPI_VictorSPX climbController2 = new WPI_VictorSPX(RobotMap.ClimbMotor_2);
+  public VictorSP climbController1 = new VictorSP(RobotMap.ClimbMotor_1);
+  public VictorSP climbController2 = new VictorSP(RobotMap.ClimbMotor_2);
 
   public void forward1(){
     climbController1.set(RobotMap.climbThrottle);    
