@@ -19,6 +19,7 @@ import frc.robot.RobotMap;
 
 
 // Subsystems //
+import frc.robot.IntakeSubsystem;
 import frc.robot.DriveSubsystem;
 
 /**
@@ -34,6 +35,7 @@ public class Robot extends TimedRobot {
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
+  public IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   public static DriveSubsystem driveSubsystem = new DriveSubsystem();
   
   @Override
@@ -127,6 +129,16 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     drive();
+
+    if (xboxController.getAButton())
+        {
+            intakeSubsystem.forward();
+        }
+    else if(xboxController.getBButton()){
+            intakeSubsystem.back();
+    }else{
+            intakeSubsystem.stop();
+    }
   }
   /**
    * This function is called once when the robot is disabled.
