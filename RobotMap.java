@@ -23,7 +23,15 @@ public class RobotMap {
     public static int leftRearMotor = 3;
     public static int rightFrontMotor = 1;
     public static int rightRearMotor = 2;
+
+        //Intake
+    public static int intakeMotor = 5;
+        //Climber
+    public static int ClimbMotor_1 = 6;
+    public static int ClimbMotor_2 = 7;
        
     // Throttle Setting //
     public static double maxThrottle = 0.7;
+    public static double intakeThrottle = 0.4;
+    public static double climbThrottle = 0.2;
 }
