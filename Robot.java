@@ -19,6 +19,7 @@ import frc.robot.RobotMap;
 
 
 // Subsystems //
+import frc.robot.ClimberSubsystem;
 import frc.robot.IntakeSubsystem;
 import frc.robot.DriveSubsystem;
 
@@ -36,6 +37,7 @@ public class Robot extends TimedRobot {
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
   public IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+  public ClimberSubsystem climberSubsystem = new ClimberSubsystem();
   public static DriveSubsystem driveSubsystem = new DriveSubsystem();
   
   @Override
@@ -130,14 +132,43 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     drive();
 
+    // Intake System Buttons
     if (xboxController.getAButton())
-        {
+      {
             intakeSubsystem.forward();
-        }
+    }
     else if(xboxController.getBButton()){
             intakeSubsystem.back();
-    }else{
+    }
+    else{
             intakeSubsystem.stop();
+    }
+
+    // Climber Subsystem Buttons
+
+    if (logitech.getRawButton(10)){
+      climberSubsystem.forward1();
+    }
+    else if (logitech.getRawButtonReleased(10)){
+      climberSubsystem.stop();
+    }
+     else if (logitech.getRawButton(12)){
+      climberSubsystem.back1();
+    }
+    else if (logitech.getRawButtonReleased(12)){
+        climberSubsystem.stop();
+    }
+    else if (logitech.getRawButton(9)){
+      climberSubsystem.forward2();
+    }
+    else if (logitech.getRawButtonReleased(9)){
+      climberSubsystem.stop();
+    }
+    else if (logitech.getRawButton(11)){
+      climberSubsystem.back2();
+    }
+    else if (logitech.getRawButtonReleased(11)){
+      climberSubsystem.stop();
     }
   }
   /**
