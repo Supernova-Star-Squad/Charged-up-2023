@@ -22,8 +22,9 @@ import frc.robot.ForkliftSubsystem;
 import frc.robot.IntakeSubsystem;
 import frc.robot.ShooterSubsystem;
 
-
-
+//ATM This is ctrl+C then V, no idea if it works
+Pixy2 pixy = Pixy2.createInstance(SPI)
+pixy.init(1) //placeholder was arg
 
 /**
  * The VM is configured to automatically run this class, and to call the
