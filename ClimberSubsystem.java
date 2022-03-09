@@ -6,45 +6,58 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+//import edu.wpi.first.wpilibj2.command.SubsystemBase;
+//import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.RobotMap;
-import edu.wpi.first.wpilibj.VictorSP;
 
-public class ClimberSubsystem extends SubsystemBase {
+//public class ClimberSubsystem {
   /**
    * Creates a new IntakeSubsystem.
    */
-  public ClimberSubsystem() {
+public class ClimberSubsystem {
 
-  }
-  public VictorSP climbController1 = new VictorSP(RobotMap.ClimbMotor_1);
-  public VictorSP climbController2 = new VictorSP(RobotMap.ClimbMotor_2);
+  //public VictorSP climbController1;
+  //public VictorSP climbController2;
+ // import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX; 
 
-  public void forward1(){
-    climbController1.set(RobotMap.climbThrottle);    
+  //public ClimberSubsystem()
+  
+  public WPI_VictorSPX ClimbMotor_L1 = new WPI_VictorSPX(RobotMap.ClimbMotor_L1);
+  public WPI_VictorSPX ClimbMotor_L2 = new WPI_VictorSPX(RobotMap.ClimbMotor_L2);
+  public WPI_VictorSPX ClimbMotor_R1 = new WPI_VictorSPX(RobotMap.ClimbMotor_R1);
+  public WPI_VictorSPX ClimbMotor_R2 = new WPI_VictorSPX(RobotMap.ClimbMotor_R2);
+    
+    //public WPI_TalonSRX leftMotor = new WPI_TalonSRX(RobotMap.ClimbMotor_1);
+    //public WPI_TalonSRX RightMotor = new WPI_TalonSRX(RobotMap.ClimbMotor_2);
+
+    MotorControllerGroup leftMotors = new MotorControllerGroup(ClimbMotor_L1,ClimbMotor_L2 );
+    MotorControllerGroup rightMotors = new MotorControllerGroup(ClimbMotor_R1,ClimbMotor_R2);
+
+  //public ClimberSubsystem(){}
+  public void extend1(){
+    leftMotors.set(RobotMap.climbThrottle);    
  }
 
- public void back1(){
-   climbController1.set(-RobotMap.climbThrottle);
+ public void retract1(){
+  leftMotors.set(-RobotMap.climbThrottle);
  }
  
  public void stop1(){
-   climbController1.set(0);
+  leftMotors.set(0);
  }
-  public void forward2(){
-    climbController2.set(RobotMap.climbThrottle);    
+  public void extend2(){
+    rightMotors.set(RobotMap.climbThrottle);    
  }
 
- public void back2(){
-   climbController2.set(-RobotMap.climbThrottle);
- }
+ public void retract2(){
+  rightMotors.set(-RobotMap.climbThrottle);
+} 
  
  public void stop2(){
-   climbController2.set(0);
+ rightMotors.set(0);
  }
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
+  
 }
+ 

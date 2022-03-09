@@ -8,20 +8,14 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.Timer;
+//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.XboxController;
 // Imports //
 // wpilib imports //
 import edu.wpi.first.wpilibj.Joystick;
+
 // import edu.wpi.first.wpilibj.buttons.*;
-// RobotMap //
-import frc.robot.RobotMap;
-
-
-// Subsystems //
-import frc.robot.ClimberSubsystem;
-import frc.robot.IntakeSubsystem;
-import frc.robot.DriveSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -31,20 +25,22 @@ import frc.robot.DriveSubsystem;
  * project.
  */
 public class Robot extends TimedRobot {
-  private static final String kDefaultAuto = "Default";
-  private static final String kCustomAuto = "My Auto";
-  private String m_autoSelected;
-  private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
   public IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   public ClimberSubsystem climberSubsystem = new ClimberSubsystem();
   public static DriveSubsystem driveSubsystem = new DriveSubsystem();
-  
+
+  Timer timer;
+
+  public XboxController xboxController;
+  public Joystick logitech;
   @Override
   public void robotInit() {
-    m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
-    m_chooser.addOption("My Auto", kCustomAuto);
-    SmartDashboard.putData("Auto choices", m_chooser);
+    
+    logitech = new Joystick(RobotMap.joystickPort);
+    xboxController = new XboxController(RobotMap.XboxControllerPort);
+
+    timer = new Timer();
   }
 
   /**
@@ -72,9 +68,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autoSelected = m_chooser.getSelected();
-    // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
-    System.out.println("Auto selected: " + m_autoSelected);
+    timer.start();
   }
 
   /**
@@ -82,15 +76,23 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    switch (m_autoSelected) {
-      case kCustomAuto:
-        // Put custom auto code here
-        break;
-      case kDefaultAuto:
-      default:
-        // Put default auto code here
-        break;
+
+
+    if (timer.get() < 1)
+    {
+    driveSubsystem.teleopDrive(0.5, 0);
     }
+    else if (timer.get() < 2)
+    {
+      intakeSubsystem.back();
+    }
+    else
+    {
+      driveSubsystem.teleopDrive(0, 0);
+      intakeSubsystem.stop();
+    }
+
+    
   }
 
   /**
@@ -100,7 +102,6 @@ public class Robot extends TimedRobot {
   public void teleopInit() {
    
   }
-  public Joystick logitech = new Joystick(RobotMap.joystickPort);
 
   public void drive(){
     double throttle = 1-((logitech.getThrottle()+1)/2);
@@ -131,7 +132,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     drive();
-
+    
     // Intake System Buttons
     if (xboxController.getAButton())
       {
@@ -146,29 +147,26 @@ public class Robot extends TimedRobot {
 
     // Climber Subsystem Buttons
 
-    if (logitech.getRawButton(10)){
-      climberSubsystem.forward1();
+    // Climber 1 controls
+    if (logitech.getRawButton(12)){ //NB:This is technically incorrect, however it works the way intended.  
+      climberSubsystem.extend1();
     }
-    else if (logitech.getRawButtonReleased(10)){
-      climberSubsystem.stop();
+     else if (logitech.getRawButton(10)){  //NB:This is technically incorrect, however it works the way intended.
+      climberSubsystem.retract1();
     }
-     else if (logitech.getRawButton(12)){
-      climberSubsystem.back1();
+    else {
+        climberSubsystem.stop1();
     }
-    else if (logitech.getRawButtonReleased(12)){
-        climberSubsystem.stop();
-    }
-    else if (logitech.getRawButton(9)){
-      climberSubsystem.forward2();
-    }
-    else if (logitech.getRawButtonReleased(9)){
-      climberSubsystem.stop();
+
+    // Climber 2 controls
+    if (logitech.getRawButton(9)){
+      climberSubsystem.extend2();
     }
     else if (logitech.getRawButton(11)){
-      climberSubsystem.back2();
+      climberSubsystem.retract2();
     }
-    else if (logitech.getRawButtonReleased(11)){
-      climberSubsystem.stop();
+    else  {
+      climberSubsystem.stop2();
     }
   }
   /**

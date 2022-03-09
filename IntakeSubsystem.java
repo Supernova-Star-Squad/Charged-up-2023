@@ -7,18 +7,16 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.RobotMap;
-import edu.wpi.first.wpilibj.VictorSP;
+import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 
-public class IntakeSubsystem extends SubsystemBase {
-  /**
-   * Creates a new IntakeSubsystem.
-   */
-  public IntakeSubsystem() {
+public class IntakeSubsystem {
+  
+    public VictorSP intakeController;
 
-  }
-  public VictorSP intakeController = new VictorSP(RobotMap.intakeMotor);
+    public IntakeSubsystem()
+    {
+      intakeController = new VictorSP(RobotMap.intakeMotor);
+    }
 
   public void forward(){
     intakeController.set(RobotMap.intakeThrottle);    
@@ -31,8 +29,4 @@ public class IntakeSubsystem extends SubsystemBase {
  public void stop(){
    intakeController.set(0);
  }
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
 }

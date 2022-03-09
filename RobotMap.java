@@ -7,31 +7,46 @@
 
 package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
-
+import edu.wpi.first.wpilibj.XboxController;
 /**
  * Add your docs here.
  */
 public class RobotMap {
 
+    
     // Controllers //
     public static int joystickPort = 0;
     public Joystick logitech = new Joystick(RobotMap.joystickPort);
+    //Xbox Controller, GuessworkCurrently
+    public static int XboxControllerPort = 1;
 
+    public XboxController xboxcontroller = new XboxController(RobotMap.XboxControllerPort);
+   
     // Motors //
-        // Drive Train //
+    
+    // Drive Train //
     public static int leftFrontMotor = 4;
     public static int leftRearMotor = 3;
     public static int rightFrontMotor = 1;
     public static int rightRearMotor = 2;
-
-        //Intake
-    public static int intakeMotor = 5;
-        //Climber
-    public static int ClimbMotor_1 = 6;
-    public static int ClimbMotor_2 = 7;
        
     // Throttle Setting //
     public static double maxThrottle = 0.7;
-    public static double intakeThrottle = 0.4;
-    public static double climbThrottle = 0.2;
+
+    // Climber //
+    public static int ClimbMotor_L1 = 5; //5
+    public static int ClimbMotor_L2 = 6; //6
+    public static int ClimbMotor_R1 = 7; //7
+    public static int ClimbMotor_R2 = 8; //8
+
+    public static double climbThrottle = 0.5;
+    
+
+    //Intake//
+    public static int intakeMotor = 0; //5
+    public static double intakeThrottle = 0.5;
+
+
+        public static int WPI_TalonSRX = 0; //5
+    
 }
