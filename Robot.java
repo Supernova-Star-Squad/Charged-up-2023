@@ -11,10 +11,10 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 //import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.cameraserver.CameraServer;
 // Imports //
 // wpilib imports //
 import edu.wpi.first.wpilibj.Joystick;
-
 // import edu.wpi.first.wpilibj.buttons.*;
 
 /**
@@ -25,18 +25,17 @@ import edu.wpi.first.wpilibj.Joystick;
  * project.
  */
 public class Robot extends TimedRobot {
-
   public IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
   public ClimberSubsystem climberSubsystem = new ClimberSubsystem();
   public static DriveSubsystem driveSubsystem = new DriveSubsystem();
-
   Timer timer;
 
   public XboxController xboxController;
   public Joystick logitech;
   @Override
   public void robotInit() {
-    
+    CameraServer.startAutomaticCapture(0);
+    CameraServer.startAutomaticCapture(1);
     logitech = new Joystick(RobotMap.joystickPort);
     xboxController = new XboxController(RobotMap.XboxControllerPort);
 
@@ -80,11 +79,11 @@ public class Robot extends TimedRobot {
 
     if (timer.get() < 1)
     {
-    driveSubsystem.teleopDrive(0.5, 0);
+    driveSubsystem.teleopDrive(0, -0.5);
     }
     else if (timer.get() < 2)
     {
-      intakeSubsystem.back();
+      intakeSubsystem.forward();
     }
     else
     {
@@ -148,6 +147,22 @@ public class Robot extends TimedRobot {
     // Climber Subsystem Buttons
 
     // Climber 1 controls
+// START XBOX ADDED FOR CLIMBERWINCH ************
+
+    if(xboxController.getXButton()){
+      climberSubsystem.forward();
+    }
+
+    else if(xboxController.getYButton()){
+      climberSubsystem.back();
+    }
+
+    else {
+      climberSubsystem.stop();
+    }
+
+// END xBOX ADDED FOR CLIMBERWINCH *************
+
     if (logitech.getRawButton(12)){ //NB:This is technically incorrect, however it works the way intended.  
       climberSubsystem.extend1();
     }

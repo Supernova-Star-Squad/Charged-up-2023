@@ -49,4 +49,8 @@ public class RobotMap {
 
         public static int WPI_TalonSRX = 0; //5
     
+
+//climberwinch//
+public static int ClimberWinch = 1; //5
+public static double winchThrottle = 0.5; //5
 }
