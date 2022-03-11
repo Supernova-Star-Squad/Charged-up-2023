@@ -80,11 +80,11 @@ public class Robot extends TimedRobot {
 
     if (timer.get() < 1)
     {
-    driveSubsystem.teleopDrive(0.5, 0);
+    driveSubsystem.teleopDrive(0, -0.5);
     }
     else if (timer.get() < 2)
     {
-      intakeSubsystem.back();
+      intakeSubsystem.forward();
     }
     else
     {
