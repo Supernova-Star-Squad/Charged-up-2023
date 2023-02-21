@@ -45,8 +45,8 @@ public class ClimberSubsystem {
     //public WPI_TalonSRX leftMotor = new WPI_TalonSRX(RobotMap.ClimbMotor_1);
     //public WPI_TalonSRX RightMotor = new WPI_TalonSRX(RobotMap.ClimbMotor_2);
 
-    leftMotors = new MotorControllerGroup(ClimbMotor_L1,ClimbMotor_L2 );
-    rightMotors = new MotorControllerGroup(ClimbMotor_R1,ClimbMotor_R2);
+    //leftMotors = new MotorControllerGroup(ClimbMotor_L1,ClimbMotor_L2 );
+    //rightMotors = new MotorControllerGroup(ClimbMotor_R1,ClimbMotor_R2);
   }
 //winch motor for climber
 

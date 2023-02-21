@@ -34,20 +34,23 @@ public class RobotMap {
     public static double maxThrottle = 0.7;
 
     // Climber //
-    public static int ClimbMotor_L1 = 5; //5
-    public static int ClimbMotor_L2 = 6; //6
-    public static int ClimbMotor_R1 = 7; //7
-    public static int ClimbMotor_R2 = 8; //8
+    //public static int ClimbMotor_L1 = 5; //5
+   // public static int ClimbMotor_L2 = 6; //6
+    //public static int ClimbMotor_R1 = 7; //7
+    //public static int ClimbMotor_R2 = 8; //8
 
-    public static double climbThrottle = 0.5;
+    //public static double climbThrottle = 0.5;
     
 
     //Intake//
-    public static int intakeMotor = 0; //5
-    public static double intakeThrottle = 0.5;
+    public static int extendMotor = 0; // pwm port 0, extend motor; changed from intake to extend
+    public static double extendThrottle = 0.5;
+
+    public static int liftMotor =1; // pwm port 1, added lift motor
+    public static double liftThrottle = 0.5;
 
 
-        public static int WPI_TalonSRX = 0; //5
+        //public static int WPI_TalonSRX = 0; //5
     
 
 //climberwinch//
