@@ -54,6 +54,6 @@ public class RobotMap {
     
 
 //climberwinch//
-public static int ClimberWinch = 1; //5
-public static double winchThrottle = 0.5; //5
+//public static int ClimberWinch = 1; //5
+//public static double winchThrottle = 0.5; //5
 }
