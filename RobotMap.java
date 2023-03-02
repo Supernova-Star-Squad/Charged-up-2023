@@ -46,7 +46,7 @@ public class RobotMap {
     public static int extendMotor = 0; // pwm port 0, extend motor; changed from intake to extend
     public static double extendThrottle = 0.5;
 
-    public static int liftMotor =1; // pwm port 1, added lift motor
+    public static int liftMotor = 1; // pwm port 1, added lift motor
     public static double liftThrottle = 0.5;
 
 

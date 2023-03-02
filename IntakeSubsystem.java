@@ -11,41 +11,33 @@ import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 
 public class IntakeSubsystem {
   
-    public VictorSP extendController;
+  public VictorSP extendController;
+  public VictorSP liftController;
 
-    public IntakeSubsystem()
-    {
-      extendController = new VictorSP(RobotMap.extendMotor);
-      liftController = new VictorSP(RobotMap.liftMotor)
-    }
+  public IntakeSubsystem()
+  {
+    extendController = new VictorSP(RobotMap.extendMotor);
+    liftController = new VictorSP(RobotMap.liftMotor);
+  }
 
   public void forward(){
     extendController.set(RobotMap.extendThrottle);    
- }
+  }
 
- public void back(){
-   extendController.set(-RobotMap.extendThrottle);
- }
- 
- public void stop(){
-   extendController.set(0);
- 
-   public VictorSP extendController;
+  public void back(){
+    extendController.set(-RobotMap.extendThrottle);
+  }
 
-   public IntakeSubsystem()
-   {
-     extendController = new VictorSP(RobotMap.extendMotor);
-   }
+  public void up(){
+    liftController.set(RobotMap.liftThrottle);    
+  }
 
- public void forward(){
-   extendController.set(RobotMap.extendThrottle);    
-}
+  public void down(){
+    liftController.set(-RobotMap.liftThrottle);
+  }
 
-public void back(){
-  extendController.set(-RobotMap.extendThrottle);
-}
-
-public void stop(){
-  extendController.set(0);
+  public void stop(){
+    extendController.set(0);
+    liftController.set(0);
   }
 }
